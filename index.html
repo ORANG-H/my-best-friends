@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Swiper.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Include Swiper.js JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message to My BSFs</title>    
+    <style>
+        /* Reset some default styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #B7E0FF; /* Body background color set to light blue */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .headline-container {
+            background-color: #243642;
+            color: #fff;
+            padding: 1.5em 2em;
+            border-radius: 15px;
+            margin-bottom: 1.5em;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+        }
+
+        /* Container for friend boxes */
+        .container {
+            display: flex;
+            gap: 2em;
+            width: 80%;
+            max-width: 800px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .friend-box {
+            padding: 2em;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            width: 150%;
+            max-width: 370px;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .friend-box:hover {
+            transform: scale(1.05);
+        }
+
+        /* Image container for styling */
+        .image-container {
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1em;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover; /* Ensures the image covers the circle */
+        }
+
+        .friend-box h2 {
+            font-size: 1.8em;
+            color: #1d3557;
+            margin-bottom: 1em;
+        }
+
+        .btn {
+            padding: 0.8em 2em;
+            font-size: 1.1em;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            background-color: #457b9d;
+            margin-top: 1em;
+            display: flex; /* Added for alignment */
+            align-items: center; /* Center icon and text vertically */
+            justify-content: center; /* Center icon and text horizontally */
+            max-width: 300px; /* Set maximum width for the button */
+            width: 100%; /* Allow button to take full width on smaller screens */
+        }
+
+        .btn img {
+            width: 24px; /* Set the icon size */
+            height: 24px; /* Set the icon size */
+            margin-right: 5px; /* Space between icon and text */
+        }
+
+        .btn:hover {
+            background-color: #e63946;
+        }
+
+        /* Responsive Design for Small Screens */
+        @media (max-width: 600px) {
+            .headline-container {
+                padding: 1em;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .friend-box {
+                max-width: 100%;
+            size: 100px;}
+
+            .btn {
+                padding: 0.6em 1.5em; /* Adjust padding for mobile */
+                font-size: 1em; /* Adjust font size for mobile */
+            }
+        }
+
+        .final-message-container {
+            background-color: #E4E0E1; /* Gradient background */
+            padding: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: 1.5em 0; /* Adjust top and bottom margins */
+            display: flex; /* Added for centering */
+            flex-direction: column; /* Added for centering */
+            justify-content: center; /* Added for centering */
+            align-items: center; /* Added for centering */
+            text-align: center; /* Keeps text centered */
+        }
+
+        .final-message-container h2 {
+            font-size: 1.8em;
+            color: #1d3557;
+            margin-bottom: 1em;
+        }
+
+        .final-message-container p {
+            font-size: 1.1em;
+            color: #333;
+            max-width: 90%; /* Optional: limits the paragraph width for better readability */
+        }
+
+        /* Specific background colors for friend boxes */
+        .friend-box:nth-child(1) {
+            background-color: #ffffff; /* First friend's background color set to white */
+        }
+
+        .friend-box:nth-child(2) {
+            background-color: #FFEBEE; /* Lighter pink for Friend 2 */
+        }
+
+        /* Swiper styles */
+        .swiper {
+            width: 100%;
+            height: 250px; /* Increased height for the memory container */
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+            width: 200px; /* Set width for square images */
+            height: 200px; /* Set height for square images */
+            object-fit: cover; /* Ensures image covers the square */
+        }
+
+        /* Adjust space for pagination */
+        .swiper-pagination {
+            margin-top: 10px; /* Space between image and pagination */
+            display: flex; /* Aligns pagination dots center */
+            justify-content: center; /* Centers the dots */
+        }
+
+        .swiper-pagination-bullet {
+            width: 10px; /* Bullet width */
+            height: 10px; /* Bullet height */
+            background: #ddd; /* Default color for bullets */
+            border-radius: 50%; /* Make bullets round */
+            margin: 0 5px; /* Space between bullets */
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #457b9d; /* Active bullet color */
+        }
+   
+   
+   
+          /* Style for the audio controls panel */
+          .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .audio-controls button {
+            color: #fff;
+            background-color: #333;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .audio-controls input[type="range"] {
+            width: 100px;
+            margin-top: 5px;
+        }
+
+
+
+
+   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+  
+    <link rel="icon" type="image/x-icon" href="bc19dbfe14b0501c27d6ff515f16a8de.jpg">
+
+
+    
+    <!-- Include Flaticon stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+
+
+
+</head>
+<body>
+   
+   
+     
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    <!-- Headline Container -->
+    <div class="headline-container">
+        <h1>Ça fait 356 jours.</h1>
+    </div>
+
+    <div class="container">
+        <!-- Marush Container -->
+        <div class="friend-box">
+            <div class="image-container">
+                <img src="./photo_2024-10-31_16-34-14.jpg" alt="Marush">
+            </div>
+            <h2>Marush</h2>
+            <p>The person I can sit and tell everything to without them judging me or misunderstanding me. She is supportive. She is sometimes harsh, but it’s for our own good. She is just beautiful (and she is probably the biggest Ronaldo fan ever).</p>
+            <a href="https://www.instagram.com/x__.marwaa.__x/" class="btn">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" alt="Instagram Logo" />
+                Instagram
+            </a>
+        </div>
+        
+        <!-- Lamis Container -->
+        <div class="friend-box">
+            <div class="image-container">
+                <img src="./photo_2024-10-31_16-34-46.jpg" alt="Lamis">
+            </div>
+            <h2>Lamis</h2>
+            <p>I can sit with her and talk about nothing for hours and hours, but I will never get bored of her. She has the craziest ideas ever and the calmest voice, which makes her even funnier.</p>
+            <a href="https://www.instagram.com/miila___s_/" class="btn">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" alt="Instagram Logo" />
+                Instagram
+            </a>
+        </div>
+        
+        <!-- Zaid Container -->
+        <div class="friend-box">
+            <div class="image-container">
+                <img src="./af723103b68e58f7927c0176d22b1dd0.gif" alt="Zaid">
+            </div>
+            <h2>Zaid</h2>
+            <p>I can describe him as a brother; he is supportive and tries to help others. He is often misunderstood and has the best heart.</p>
+            <a href="https://www.instagram.com/zors.17/ " class="btn">
+                <img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" alt="Instagram Logo" />
+                Instagram
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Marush Memories Container -->
+        <div class="friend-box">
+            <h2>Marwa's Memories</h2>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="./مروش/1.jpg" alt="Memory 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/2.jpg" alt="Memory 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/3.jpg" alt="Memory 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/4.jpg" alt="Memory 4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/5.jpg" alt="Memory 5">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/6.jpg" alt="Memory 6">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/7.jpg" alt="Memory 7">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/8.jpg" alt="Memory 8">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/9.jpg" alt="Memory 9">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/10.jpg" alt="Memory 10">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/11.jpg" alt="Memory 11">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/12.jpg" alt="Memory 12">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/13.jpg" alt="Memory 13">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/14.jpg" alt="Memory 14">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/15.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/16.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/17.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/18.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./مروش/19.jpg" alt="Memory 15">
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <!-- Lamis Memories Container -->
+        <div class="friend-box">
+            <h2>Lamis's Memories</h2>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="./لميس/1.jpg" alt="Memory 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/2.jpg" alt="Memory 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/3.jpg" alt="Memory 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/4.jpg" alt="Memory 4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/5.jpg" alt="Memory 5">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/6.jpg" alt="Memory 6">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/7.jpg" alt="Memory 7">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/8.jpg" alt="Memory 8">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/9.jpg" alt="Memory 9">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/10.jpg" alt="Memory 10">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/11.jpg" alt="Memory 11">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/12.jpg" alt="Memory 12">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/13.jpg" alt="Memory 13">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/14.jpg" alt="Memory 14">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/15.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/16.jpg" alt="Memory 13">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/17.jpg" alt="Memory 14">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/18.jpg" alt="Memory 15">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./لميس/19.jpg" alt="Memory 15">
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- Add Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-message-container">
+        <h2>To The best duo i have ever met</h2>
+        <p>I talked to each one of you for hours and hours and never felt bored. You've always been fun people to be around. I really like talking to you every day, hopefully forever. Thank you for always being there. I have nothing but love for both of you, even though I don't say it that much. You are the best.</p>
+</p>
+    </div>
+
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html>
+
+
+
+   
+<div class="timer-container">
+    <div id="timer" class="timer"></div>
+    <div class="label"></div>
+    <div class="note"> <strong>This is the countdown till our next year!!</strong></div> <!-- Added note -->
+</div>
+<script src="timer.js"></script> <!-- Link to the JavaScript file -->
+
+<!-- Your existing HTML content -->
+
+    <!-- Audio Player (Hidden by default) -->
+    <audio id="theme-song" src="./audio.mp3" autoplay loop></audio>
+
+    <!-- Audio Controls Panel -->
+    <div class="audio-controls">
+        <button onclick="togglePlayPause()">Play/Pause</button>
+        <button onclick="toggleMute()">Mute/Unmute</button>
+        <label for="volume-control">Volume</label>
+        <input type="range" id="volume-control" min="0" max="100" value="50" onchange="setVolume(this.value)">
+    </div>
+
+    <!-- JavaScript for Audio Controls -->
+    <script>
+        const audio = document.getElementById('theme-song');
+
+        // Play the audio automatically when the page loads
+        window.onload = function() {
+            audio.volume = 0.5; // Set initial volume to 50%
+            audio.play();
+        };
+
+        // Toggle play/pause function
+        function togglePlayPause() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Toggle mute/unmute function
+        function toggleMute() {
+            audio.muted = !audio.muted;
+        }
+
+        // Set volume function
+        function setVolume(volume) {
+            audio.volume = volume / 100; // Convert range value (0-100) to (0.0-1.0)
+        }
+    </script> 
+    
+
+
+
+
+
+</body> 
+    
+    
+    </html>
